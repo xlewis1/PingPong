@@ -1,3 +1,4 @@
+/* GENERAL */
 body {
   margin: 0;
   font-family: 'Arial', sans-serif;
@@ -6,6 +7,7 @@ body {
   display: flex;
   flex-direction: column;
   align-items: center;
+  touch-action: none; /* prevents pinch-zoom & scrolling on touch */
 }
 
 .header {
@@ -24,17 +26,21 @@ body {
   100% { color: blue; }
 }
 
-.scoreboard {
+.scores {
   font-size: 2em;
   margin-top: 5px;
 }
 
 .game-container {
   position: relative;
+  width: 100%;
+  max-width: 600px;
   margin: 20px 0;
 }
 
 #pongCanvas {
+  width: 100%;
+  height: auto;
   border: 5px solid;
   border-image: linear-gradient(90deg, blue, red) 1;
   animation: borderColor 2s infinite alternate;
@@ -46,9 +52,11 @@ body {
   100% { border-color: blue; }
 }
 
+/* TOUCH CONTROLS */
 .touch-controls {
   display: flex;
-  justify-content: center;
+  justify-content: space-around;
+  flex-wrap: wrap;
   margin-top: 10px;
   gap: 10px;
 }
@@ -65,10 +73,12 @@ body {
   user-select: none;
 }
 
-.touch-controls button:nth-child(3), .touch-controls button:nth-child(4) {
+.touch-controls button:nth-child(3),
+.touch-controls button:nth-child(4) {
   background: red;
 }
 
+/* SETTINGS PANEL */
 .settings-btn {
   position: fixed;
   top: 10px;
@@ -94,20 +104,10 @@ body {
   right: 0;
 }
 
-.settings-sidebar h2 {
-  margin-top: 0;
-}
-
-.settings-sidebar label {
-  display: block;
-  margin-bottom: 15px;
-}
-
+.settings-sidebar h2 { margin-top: 0; }
+.settings-sidebar label { display: block; margin-bottom: 15px; }
 .settings-sidebar select,
-.settings-sidebar input[type=range] {
-  width: 100%;
-}
-
+.settings-sidebar input[type=range] { width: 100%; }
 .settings-sidebar button {
   width: 100%;
   padding: 10px;
@@ -119,20 +119,22 @@ body {
   border-radius: 5px;
 }
 
-body.gameboy {
-  background: #9bbc0f;
-  color: #0f380f;
-}
+/* THEMES */
+body.gameboy { background: #9bbc0f; color: #0f380f; }
+body.redblue { background: black; }
+body.neon { background: #111; }
+body.green { background: #0a0; color: #ccc; }
 
-body.redblue {
-  background: black;
-}
+/* MOBILE ADJUSTMENTS */
+@media (max-width: 500px) {
+  .touch-controls {
+    flex-direction: column;
+    gap: 5px;
+  }
 
-body.neon {
-  background: #111;
-}
-
-body.green {
-  background: #0a0;
-  color: #ccc;
+  .touch-controls button {
+    width: 40px;
+    height: 40px;
+    font-size: 1.2em;
+  }
 }
